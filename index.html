@@ -409,9 +409,10 @@
                         }" class="card-img-top" style="height: 13rem; alt="Blog Image" />
                       </div>
                       <div class="card-body">
-                        <h4 class="card-text" style="text-align: left">${
-                          blogs.title
-                        }</h4>
+                        <h4 class="card-text" style="text-align: left">
+  ${blogs.title.split(" ").slice(0, 8).join(" ")}...
+</h4>
+
                         <p class="card-text" style="text-align: left">
   ${blogs.description.split(" ").slice(0, 15).join(" ")}...
 </p>
