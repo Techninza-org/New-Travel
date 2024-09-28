@@ -19,6 +19,9 @@
     <title>Document</title>
   </head>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     * {
       margin: 0;
       padding: 0;
@@ -87,12 +90,7 @@
             >
               <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                  <a
-                    class="nav-link active"
-                    aria-current="page"
-                    href="Blog.html"
-                    >Blog</a
-                  >
+                  <a class="nav-link active" href="#blogContainer">Blog</a>
                 </li>
               </ul>
             </div>
@@ -406,11 +404,17 @@
                   <div class="col-md-4 mt-5 ">
                     <div class="card p-4" style=" border: none; background-color: rgb(231, 240, 241);">
                       <div>
-                        <img src="${blogs.image}" class="card-img-top" style="height: 13rem; alt="Blog Image" />
+                        <img src="${
+                          blogs.image
+                        }" class="card-img-top" style="height: 13rem; alt="Blog Image" />
                       </div>
                       <div class="card-body">
-                        <h4 class="card-text" style="text-align: left">${blogs.title}</h4>
-                        <p class="card-text" style="text-align: left">${blogs.description}</p>
+                        <h4 class="card-text" style="text-align: left">${
+                          blogs.title
+                        }</h4>
+                        <p class="card-text" style="text-align: left">
+  ${blogs.description.split(" ").slice(0, 15).join(" ")}...
+</p>
                         <div style="text-align: left; margin-top: 2rem">
                           <a href="Blog.html?id=${blogs.id}">
                             <button class="btn btn-primary">Read more</button>
