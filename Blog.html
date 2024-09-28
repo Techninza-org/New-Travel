@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" id="meta-description" />
+    <meta name="keywords" content="" id="meta-keywords" />
+    <meta name="author" content="Ezio Travels" />
     
     <link
       rel="stylesheet"
@@ -16,7 +19,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <title>Blog Page</title>
+    <title id="meta-title"></title>
     <style>
       .blog-page {
         margin-top: 5rem;
@@ -175,6 +178,9 @@
           .get(blogApiUrl)
           .then((response) => {
             const blogData = response.data.blog;
+            document.getElementById("meta-title").textContent = blogData.title || "No Title Available";
+            document.getElementById("meta-description").setAttribute("content", blogData.meta || "No Description Available");
+            document.getElementById("meta-keywords").setAttribute("content", blogData.keywords || "");
             console.log(blogData);
             const blogHTML = `
               <img src="${
