@@ -157,81 +157,83 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
- window.onload = function () {
-  // Get the blog ID from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get('id'); // Assuming the URL has a query parameter like ?id=someValue
-  console.log(id);
-
-  // Check if id is available
-  if (!id) {
-    console.error("Blog ID is not defined.");
-    return; // Exit if id is not found
-  }
-
-  // API URL (replace with your actual API URL)
-  const apiURL = `https://eziotravels.com/api/auth/blog/${id}`;
-
-  // Fetch the data using Axios
-  axios
-    .get(apiURL)
-    .then((response) => {
-      const blogData = response.data.blog;
-
-      // Log the created_at value for debugging
-      console.log("Created At:", blogData.created_at);
-
-      const blogHTML = `
-        <h1 class="head mb-5 d-flex text-start">${blogData.title || 'No Title Available'}</h1>
-        <div class="d-flex mb-5" style="gap: 10px; margin-top: -3rem;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" style="margin-top: 4px;" viewBox="0 0 16 16">
-            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
-            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-          </svg>
-          <span>${formatDate(blogData.created_at)}</span>
-        </div>
-        <img src="${blogData.image || 'default-image.jpg'}" class="img-fluid" alt="Blog Image" />
-        <p class="d-flex text-start mt-5">${blogData.description || 'No Description Available'}</p>
-      `;
-
-      // Inject the blog content into the container
-      const blogContainer = document.getElementById("blog-container");
-      if (blogContainer) {
-        blogContainer.innerHTML = blogHTML;
-      } else {
-        console.error("Blog container not found.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching blog data:", error);
-      const blogContainer = document.getElementById("blog-container");
-      if (blogContainer) {
-        blogContainer.innerHTML = `<p>Failed to load the blog. Please try again later.</p>`;
-      }
-    });
-};
-
-function formatDate(dateString) {
-  // Parse the ISO string into a JavaScript Date object
-  const date = new Date(dateString);
-
-  // Check if the date is valid
-  if (isNaN(date.getTime())) {
-    console.error("Invalid date:", dateString);
-    return "Invalid Date"; // Return a default message if the date is invalid
-  }
-
-  // Extract day, month, and year
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed, so add 1
-  const year = date.getFullYear();
-
-  // Return the formatted date in dd/mm/yyyy format
-  return `${day}/${month}/${year}`;
-}
-
-
-    </script>
+      window.onload = function () {
+       // Get the full path after Blog.html
+       const path = window.location.pathname;
+       
+       // Extract the part after '/Blog.html/' (which is your blog identifier)
+       const blogIdentifier = path.split('/Blog.html/')[1]; 
+     
+       // Check if the blog identifier exists
+       if (!blogIdentifier) {
+         console.error("Blog identifier is not defined.");
+         return; // Exit if the blog identifier is not found
+       }
+     
+       console.log(blogIdentifier); // Log the identifier for debugging
+     
+       // API URL (replace with your actual API URL)
+       const apiURL = `https://eziotravels.com/api/auth/blog/${blogIdentifier}`;
+     
+       // Fetch the data using Axios
+       axios
+         .get(apiURL)
+         .then((response) => {
+           const blogData = response.data.blog;
+     
+           // Log the created_at value for debugging
+           console.log("Created At:", blogData.created_at);
+     
+           const blogHTML = `
+             <h1 class="head mb-5 d-flex text-start">${blogData.title || 'No Title Available'}</h1>
+             <div class="d-flex mb-5" style="gap: 10px; margin-top: -3rem;">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" style="margin-top: 4px;" viewBox="0 0 16 16">
+                 <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
+                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+               </svg>
+               <span>${formatDate(blogData.created_at)}</span>
+             </div>
+             <img src="${blogData.image || 'default-image.jpg'}" class="img-fluid" alt="Blog Image" />
+             <p class="d-flex text-start mt-5">${blogData.description || 'No Description Available'}</p>
+           `;
+     
+           // Inject the blog content into the container
+           const blogContainer = document.getElementById("blog-container");
+           if (blogContainer) {
+             blogContainer.innerHTML = blogHTML;
+           } else {
+             console.error("Blog container not found.");
+           }
+         })
+         .catch((error) => {
+           console.error("Error fetching blog data:", error);
+           const blogContainer = document.getElementById("blog-container");
+           if (blogContainer) {
+             blogContainer.innerHTML = `<p>Failed to load the blog. Please try again later.</p>`;
+           }
+         });
+     };
+     
+     function formatDate(dateString) {
+       // Parse the ISO string into a JavaScript Date object
+       const date = new Date(dateString);
+     
+       // Check if the date is valid
+       if (isNaN(date.getTime())) {
+         console.error("Invalid date:", dateString);
+         return "Invalid Date"; // Return a default message if the date is invalid
+       }
+     
+       // Extract day, month, and year
+       const day = String(date.getDate()).padStart(2, '0');
+       const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed, so add 1
+       const year = date.getFullYear();
+     
+       // Return the formatted date in dd/mm/yyyy format
+       return `${day}/${month}/${year}`;
+     }
+     </script>
+     
     
 
   </body>

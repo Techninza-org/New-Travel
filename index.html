@@ -22,6 +22,7 @@
     html {
       scroll-behavior: smooth;
     }
+
     * {
       margin: 0;
       padding: 0;
@@ -34,6 +35,7 @@
       width: 100%;
       z-index: 1000;
     }
+
     .Investor {
       text-align: center;
       padding: 50px;
@@ -90,7 +92,7 @@
             >
               <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#blogContainer">Blog</a>
+                  <a class="nav-link active" href="BlogPage.html">Blog</a>
                 </li>
               </ul>
             </div>
@@ -410,14 +412,17 @@
                       </div>
                       <div class="card-body">
                         <h4 class="card-text" style="text-align: left">
-  ${blogs.title.split(" ").slice(0, 8).join(" ")}...
-</h4>
+                       ${blogs.title.split(" ").slice(0, 8).join(" ")}..
+                        </h4>
 
                         <p class="card-text" style="text-align: left">
-  ${blogs.description.split(" ").slice(0, 15).join(" ")}...
-</p>
+                        ${blogs.description
+                          .split(" ")
+                          .slice(0, 15)
+                          .join(" ")}...
+                        </p>
                         <div style="text-align: left; margin-top: 2rem">
-                          <a href="Blog.html?id=${blogs.id}">
+                          <a href="Blog.html/${blogs.slug}">
                             <button class="btn btn-primary">Read more</button>
                           </a>
                         </div>
