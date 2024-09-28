@@ -412,20 +412,20 @@
             blogs.slice(0, 3).forEach((blog) => {
               const blogCard = `
           <div class="col-md-4 mt-5 ">
-            <div class="card p-4" style=" border: none; background-color: rgb(231, 240, 241);">
+            <div class="card p-4 relative" style=" border: none; background-color: rgb(231, 240, 241);">
               <div>
                 <img src="${
                   blog.image
                 }" class="card-img-top" style="height: 13rem;" alt="Blog Image" />
               </div>
-              <div class="card-body">
+              <div class="card-body" style="min-height:250px">
                 <h4 class="card-text" style="text-align: left">
                   ${blog.title.split(" ").slice(0, 8).join(" ")}..
                 </h4>
                 <p class="card-text" style="text-align: left">
                   ${blog.description.split(" ").slice(0, 15).join(" ")}...
                 </p>
-                <div style="text-align: left; margin-top: 2rem">
+                <div class="mt-2 text-start " style="position:absolute;bottom:15px">
                   <a href="Blog.html?id=${blog.slug}">
                     <button class="btn btn-primary">Read more</button>
                   </a>
